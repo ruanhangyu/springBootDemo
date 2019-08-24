@@ -19,3 +19,5 @@ srpingMVC的原理
 第3步：目标Controller处理完业务后，返回一个ModelAndView给DispatcherServlet
 第4步：DispatcherServlet通过ViewResolver视图解析器找到对应的视图对象View
 第5步：视图对象View负责渲染，并返回到浏览器
+
+@ComponentScan注册指定包里的bean

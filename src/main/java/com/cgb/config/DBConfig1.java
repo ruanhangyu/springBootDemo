@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "spring.datasource1")
 public class DBConfig1 {
 
+
 	private String url;
 	private String username;
 	private String password;

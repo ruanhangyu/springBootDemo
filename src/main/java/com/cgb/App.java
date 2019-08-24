@@ -2,6 +2,7 @@ package com.cgb;
 
 import com.cgb.config.DBConfig1;
 import com.cgb.config.DBConfig2;
+import com.cgb.ruan.entity.Student;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
