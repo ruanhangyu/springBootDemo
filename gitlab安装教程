@@ -1,0 +1,43 @@
+建议虚拟机内存2G以上
+1.下载镜像文件
+docker pull beginor/gitlab-ce:11.0.1-ce.0
+
+注意：一定要配置阿里云的加速镜像
+2.	创建GitLab 的配置 (etc) 、 日志 (log) 、数据 (data) 放到容器之外， 便于日后升级， 因此请先准备这三个目录。
+mkdir -p /mnt/gitlab/etc
+mkdir -p /mnt/gitlab/log
+mkdir -p /mnt/gitlab/data
+
+3.	运行GitLab容器
+
+
+docker run \
+    --detach \
+    --publish 8443:443 \
+    --publish 8090:80 \
+    --name gitlab \
+    --restart unless-stopped \
+    -v /mnt/gitlab/etc:/etc/gitlab \
+    -v /mnt/gitlab/log:/var/log/gitlab \
+    -v /mnt/gitlab/data:/var/opt/gitlab \
+    beginor/gitlab-ce:11.0.1-ce.0 
+
+停止docker容器，并且删除
+Docker stop 容器id
+Docker rm 容器id
+systemctl stop firewalld
+
+4.修改/mnt/gitlab/etc/gitlab.rb
+把external_url改成部署机器的域名或者IP地址
+
+vi /mnt/gitlab/etc/gitlab.rb
+external_url 'http://192.168.212.227'
+
+4.	修改/mnt/gitlab/data/gitlab-rails/etc/gitlab.yml
+vi /mnt/gitlab/data/gitlab-rails/etc/gitlab.yml
+找到关键字 * ## Web server settings * 
+将host的值改成映射的外部主机ip地址和端口，这里会显示在gitlab克隆地址
+ 
+
+到此为止，gitlab的web管理页面就可以正常访问
+
